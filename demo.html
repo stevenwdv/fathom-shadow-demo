@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Fathom Shadow demo</title>
+	<script src="dist/bundle.js"></script>
+	<script>
+		class MyForm extends HTMLElement
+		{
+			constructor() {
+				super();
+				const shadowRoot = this.attachShadow({mode: 'open'});
+
+				const form  = document.createElement('form');
+				form.method = 'POST';
+				form.action = '';
+
+				const email = document.createElement('input');
+				email.type  = 'email';
+				email.name  = 'email';
+
+				const password = document.createElement('input');
+				password.type  = 'password';
+				password.name  = 'password';
+
+				form.append(email, password);
+
+				shadowRoot.append(form);
+			}
+		}
+
+		customElements.define('my-form', MyForm);
+	</script>
+	<script>
+		addEventListener('load', () => {
+			for (const fathomEdition of ['fathomWeb', 'fathomShadow'])
+				document.getElementById(`result-${fathomEdition}`).innerText =
+					  `Found ${[...detect.detectEmailInputs(document, fathomEdition)].length} email field(s)`;
+		});
+	</script>
+</head>
+<body>
+
+<my-form></my-form>
+
+<p>Regular Fathom: <span id="result-fathomWeb">...</span></p>
+<p>Fathom Shadow: <span id="result-fathomShadow">...</span></p>
+
+</body>
+</html>
