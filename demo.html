@@ -11,17 +11,16 @@
 				super();
 				const shadowRoot = this.attachShadow({mode: 'open'});
 
-				const form  = document.createElement('form');
-				form.method = 'POST';
-				form.action = '';
+				const form         = document.createElement('form');
+				form.style.display = 'inline-block';
+				form.method        = 'POST';
+				form.action        = '';
 
-				const email = document.createElement('input');
-				email.type  = 'email';
-				email.name  = 'email';
+				const email       = document.createElement('input');
+				email.placeholder = email.name = email.type = 'email';
 
-				const password = document.createElement('input');
-				password.type  = 'password';
-				password.name  = 'password';
+				const password       = document.createElement('input');
+				password.placeholder = password.name = password.type = 'password';
 
 				form.append(email, password);
 
@@ -38,6 +37,12 @@
 					  `Found ${[...detect.detectEmailInputs(document, fathomEdition)].length} email field(s)`;
 		});
 	</script>
+	<style>
+		my-form {
+			border: inset;
+			padding: .2em;
+		}
+	</style>
 </head>
 <body>
 
